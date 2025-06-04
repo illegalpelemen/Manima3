@@ -1,0 +1,5 @@
+# This file is used internally by FFMPEG.
+file 'file:C:/Users/nnata/PycharmProjects/Manima1/media/videos/kl/720p30/partial_movie_files/SquareToCircle/2016333726_2424931863_223132457.mp4'
+file 'file:C:/Users/nnata/PycharmProjects/Manima1/media/videos/kl/720p30/partial_movie_files/SquareToCircle/543634251_142382560_3584879466.mp4'
+file 'file:C:/Users/nnata/PycharmProjects/Manima1/media/videos/kl/720p30/partial_movie_files/SquareToCircle/543634251_1017012012_3584879466.mp4'
+file 'file:C:/Users/nnata/PycharmProjects/Manima1/media/videos/kl/720p30/partial_movie_files/SquareToCircle/543634251_1922680358_3584879466.mp4'
