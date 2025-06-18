@@ -18,17 +18,36 @@ class SquareToCircle(ThreeDScene):
         # self.play(fadeout)
         #circle = Circle(color=YELLOW).shift(LEFT * 2)
         #self.add(circle)
+        axes = ThreeDAxes(
+            x_range=[-3, 3],
+            y_range=[-3, 3],
+            z_range=[-3, 3],
+            x_length=6,
+            y_length=6,
+            z_length=6,
+        )
+        x_label = Text("X", font_size=24).next_to(axes.x_axis.get_end(), RIGHT)
+        y_label = Text("Y", font_size=24).next_to(axes.y_axis.get_end(), UP)
+        z_label = Text("Z", font_size=24).next_to(axes.z_axis.get_end(), OUT)
+        self.add(axes, x_label, y_label, z_label)
         square = Square(fill_color= YELLOW,fill_opacity=1)
         square1 = Square(fill_color= RED,fill_opacity=1)
-        axes = Axes()
-        self.add(axes)
+
+
         self.add(square)
         self.add(square1)
-        square1.move_to([0,3,6])
+        square1.move_to([0,3,2])
         #self.play(square.animate.move_to(ORIGIN))
         self.wait(3)
         #self.set_camera_orientation(theta= 45)
-        self.camera.set_focal_distance(1)
-        self.move_camera(theta = 360 * DEGREES,run_time = 6)
+        self.camera.set_focal_distance(35)
+        self.move_camera(phi = 40 * DEGREES,run_time = 3)
+        self.move_camera(theta=30 * DEGREES, run_time=3)
+
+        self.move_camera(phi=60 * DEGREES, run_time=3)
+        self.move_camera(theta=70 * DEGREES, run_time=3)
+
+
+
         self.wait(3)
 
