@@ -1,7 +1,7 @@
 print("hello world")
 from manim import *
-config.pixel_width = 1920
-config.pixel_height = 1080
+#config.pixel_width = 1920
+#config.pixel_height = 1080
 class SquareToCircle(ThreeDScene):
     def construct(self):
         # circle = Circle(color = BLUE ,fill_color=RED ,fill_opacity=0.1)
@@ -36,16 +36,16 @@ class SquareToCircle(ThreeDScene):
 
         self.add(square)
         self.add(square1)
-        square1.move_to([0,3,2])
+        square1.move_to([0,3,1])
         #self.play(square.animate.move_to(ORIGIN))
         self.wait(3)
         #self.set_camera_orientation(theta= 45)
-        self.camera.set_focal_distance(35)
+        self.camera.frame.animate.scale(2)
         self.move_camera(phi = 40 * DEGREES,run_time = 3)
-        self.move_camera(theta=30 * DEGREES, run_time=3)
+        self.move_camera(theta=-30 * DEGREES, run_time=3)
 
         self.move_camera(phi=60 * DEGREES, run_time=3)
-        self.move_camera(theta=70 * DEGREES, run_time=3)
+
 
 
 

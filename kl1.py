@@ -1,23 +1,29 @@
 print("hello world")
 from manim import *
 
-class SquareToCircle(Scene):
+class SquareToCircle(ThreeDScene):
     def construct(self):
-        circle = Circle(color = BLUE ,fill_color=RED ,fill_opacity=0.1)
-        circle1 = Circle(color=BLUE , fill_color=RED , fill_opacity=0.1)
-        square = Square (color = RED , fill_color=BLUE , fill_opacity=0.9)
-        sphere = Sphere ( )
-        squareanim = Create(circle)
-        transformation = Transform(circle, square)
-        transformation1 = Transform(circle, circle1)
-        transformation2 = Transform(circle1, sphere)
-        transformation3 = Transform(sphere, circle)
+        sphere = Sphere(fill_color=RED,fill_opacity=1)
+        sphere.set_shade_in_3d(True)
+        axes = ThreeDAxes(
+            x_range=[-3, 3],
+            y_range=[-3, 3],
+            z_range=[-3, 3],
+            x_length=6,
+            y_length=6,
+            z_length=6,
+        )
+        x_label = Text("X", font_size=24).next_to(axes.x_axis.get_end(), RIGHT)
+        y_label = Text("Y", font_size=24).next_to(axes.y_axis.get_end(), UP)
+        z_label = Text("Z", font_size=24).next_to(axes.z_axis.get_end(), OUT)
+        self.add(axes, x_label, y_label, z_label)
+        anim = Create(sphere)
+        fadeout = FadeOut(sphere)
+        circle_path = Circle(2)
+        orbit = MoveAlongPath(sphere,circle_path)
+        self.play(anim)
+        self.play(orbit,Rotate(self.renderer.get_frame(),30 * DEGREES,UP),
 
-        fadeout = FadeOut(circle)
-        self.play(squareanim)
-        self.play(transformation)
-        self.play(transformation1)
-        self.play(transformation2)
-        self.play(transformation3)
-        self.play(FadeOut(sphere))
+                  run_time= 10)
+
         self.play(fadeout)
