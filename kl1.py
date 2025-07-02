@@ -1,6 +1,6 @@
-print("hello world")
-from manim import *
 
+from manim import *
+print(config.renderer)
 class SquareToCircle(ThreeDScene):
     def construct(self):
         sphere = Sphere(fill_color=RED,fill_opacity=1)
@@ -21,9 +21,9 @@ class SquareToCircle(ThreeDScene):
         fadeout = FadeOut(sphere)
         circle_path = Circle(2)
         orbit = MoveAlongPath(sphere,circle_path)
+        anim_phi = self.camera.phi_tracker.animate.set_value(40 * DEGREES)
+        anim_theta = self.camera.theta_tracker.animate.set_value(40 * DEGREES)
         self.play(anim)
-        self.play(orbit,Rotate(self.renderer.get_frame(),30 * DEGREES,UP),
-
-                  run_time= 10)
+        self.play(orbit,anim_phi,anim_theta,run_time = 10)
 
         self.play(fadeout)

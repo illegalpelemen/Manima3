@@ -40,12 +40,15 @@ class SquareToCircle(ThreeDScene):
         #self.play(square.animate.move_to(ORIGIN))
         self.wait(3)
         #self.set_camera_orientation(theta= 45)
-        self.camera.frame.animate.scale(2)
-        self.move_camera(phi = 40 * DEGREES,run_time = 3)
-        self.move_camera(theta=-30 * DEGREES, run_time=3)
+        #self.move_camera(phi = 40 * DEGREES,run_time = 3)
+        #self.move_camera(theta=-30 * DEGREES, run_time=3)
+        anim_phi = self.camera.phi_tracker.animate.set_value(40 * DEGREES)
+        anim_theta = self.camera.theta_tracker.animate.set_value(40 * DEGREES)
+        moving_square = square.animate.move_to(RIGHT*3+UP*2)
 
-        self.move_camera(phi=60 * DEGREES, run_time=3)
-
+        #self.move_camera(phi=60 * DEGREES, run_time=3)
+        self.wait(1)
+        self.play(anim_phi,anim_theta,run_time = 10)
 
 
 
