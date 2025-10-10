@@ -2,16 +2,15 @@ import random
 from manim import *
 
 y = 0.3
-id_x = None
+id_x = []
 
 def graphic(x):
     global y, id_x
 
     rand = random.choice([0.1, -0.1])
     y = y + rand
-    print(y)
     if round(y,2) == 0:
-        id_x = x
+        id_x.append(x)
 
     return float(y)
 
@@ -30,8 +29,9 @@ class GraphCreate(Scene):
         dot = Dot([0, 3, 0], color=BLUE)
         text = Text(str(round(y, 2)), color=BLUE)
         self.add(plane, dot)
-        if id_x is not None:
-            self.add(Dot([id_x,0,0],color=BLUE))
+        for i in id_x:
+            self.add(Dot([i,0,0],color=BLUE))
         self.add(text.next_to(dot, UP))
+        print(id_x)
         self.play(Create(graph), run_time=3)  # график рисуется за 3 секунды
         self.wait()
