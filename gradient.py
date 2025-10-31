@@ -4,24 +4,33 @@ class Gradient(Scene):
     def gen_list(self,svx,svy):
 
         a = []
-        hh = 255
+
         for q in range(svy):
             b = []
+
+
             for i in range(svx):
-                if q == 0 or q == svy-1 or i == 0 or i == svx-1 or q == i or q + i == svy-1:
-                    b.append(hh)
+
+                if i == 0 or q == 0:
+                    b.append(0.1)
                 else:
-                    b.append(i)
+                    s = (b[i-1] + a[q-1][i]) /1.5
+                    if s > 255:
+                        b.append(s/1.5)
+                    else:
+                        b.append(s)
+
 
             a.append(b)
         for r in a:
             for x in r:
                 print(str(x).zfill(3),end =" ")
             print()
+        print("____________________________")
         return a
     def construct(self):
 
-        a = self.gen_list(50,50)
+        a = self.gen_list(30,30)
 
 
         imageArray = np.uint8(a)
