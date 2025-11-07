@@ -18,7 +18,7 @@ class Check(Scene):
         return a
     def construct(self):
         a = self.gen_list()
-        c = 5
+        c = 7
         r = range(0,c, 1)
         for e in r:
 
