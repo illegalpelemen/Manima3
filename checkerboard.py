@@ -23,12 +23,27 @@ class Check(Scene):
         amount_of_squares = len(a[0])
         amount_of_squaresy = len(a)
         r = range(0, amount_of_squares, 1)
-        for e in r:
-            self.add(self.square(amount_of_squares, amount_of_squaresy, e,1))
 
-    def square(self, amount_of_squaresx, amount_of_squaresy, which_squarex,which_squarey):
+        for v in range(amount_of_squaresy):
+            if v % 2 == 0:
+
+                for e in r:
+                    if e % 2 !=0:
+                        self.add(self.square(amount_of_squares, amount_of_squaresy, e,v,True))
+
+
+    def square(self, amount_of_squaresx, amount_of_squaresy, which_squarex,which_squarey,to_fill):
         scale = 14 / amount_of_squaresx
-        scaley = 6 / amount_of_squaresy
-        lighted_square = (Square(color=BLUE, side_length=scale)
-                          .move_to([which_squarex * scale - 7 + 0.5 * scale, which_squarey * scaley - 0.5* scaley , 0]))
+        scaley = 8 / amount_of_squaresy
+        if scale > scaley:
+            recommended = scaley
+        else:
+            recommended = scale
+        if to_fill:
+            color = PURPLE_B
+        else:
+            color = None
+        lighted_square = (Square(color=BLUE, side_length=recommended,fill_color= color,fill_opacity=0.9)
+                           .move_to([which_squarex * recommended - 7 + 0.5 * recommended  , -1 * which_squarey * recommended + 4 - 0.5* recommended,0]))
+
         return lighted_square
