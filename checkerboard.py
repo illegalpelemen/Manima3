@@ -1,19 +1,23 @@
 from manim import *
 import random
 
-
+#to_fill = (v % 2 == 0 and e % 2 !=0) or (e % 2 == 0 and v % 2 !=0)
 class Check(Scene):
 
     def gen_list(self):
-        svx = 8
-        svy = 8
+        n = 11
+        svx = n
+        svy = n
         a = []
 
         for q in range(svy):
             b = []
 
             for i in range(svx):
-                b.append(0)
+                if i == n // 2 or q == n // 2 or q == i or q+i+1 == n:
+                    b.append(1)
+                else:
+                    b.append(0)
 
             a.append(b)
         return a
@@ -23,13 +27,15 @@ class Check(Scene):
         amount_of_squares = len(a[0])
         amount_of_squaresy = len(a)
         r = range(0, amount_of_squares, 1)
-
         for v in range(amount_of_squaresy):
-            if v % 2 == 0:
 
-                for e in r:
-                    if e % 2 !=0:
-                        self.add(self.square(amount_of_squares, amount_of_squaresy, e,v,True))
+            for e in r:
+
+                value = a[v][e]
+                to_fill =  value != 0
+
+
+                self.add(self.square(amount_of_squares, amount_of_squaresy, e,v,to_fill))
 
 
     def square(self, amount_of_squaresx, amount_of_squaresy, which_squarex,which_squarey,to_fill):
