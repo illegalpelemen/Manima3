@@ -14,11 +14,18 @@ class Check(Scene):
             b = []
 
             for i in range(svx):
-                if i == n // 2 or q == n // 2 or q == i or q+i+1 == n:
+                if  q == i or q+i+1 == n:
+                    b.append(3)
+                elif q > i and q + i + 1 < n:
                     b.append(1)
+                elif q < i and q + i + 1 > n:
+                    b.append(4)
+                elif q > i and q + i + 1 > n:
+                    b.append(2)
+                elif q < i and q + i + 1 < n:
+                    b.append(5)
                 else:
                     b.append(0)
-
             a.append(b)
         return a
 
@@ -33,23 +40,21 @@ class Check(Scene):
 
                 value = a[v][e]
                 to_fill =  value != 0
+                color = {5:PURPLE_B,1:PINK,2:RED,3:BLUE,4:YELLOW}[value]
+
+                self.add(self.square(amount_of_squares, amount_of_squaresy, e,v,to_fill,color))
 
 
-                self.add(self.square(amount_of_squares, amount_of_squaresy, e,v,to_fill))
-
-
-    def square(self, amount_of_squaresx, amount_of_squaresy, which_squarex,which_squarey,to_fill):
+    def square(self, amount_of_squaresx, amount_of_squaresy, which_squarex,which_squarey,to_fill,color = PURPLE_B):
         scale = 14 / amount_of_squaresx
         scaley = 8 / amount_of_squaresy
         if scale > scaley:
             recommended = scaley
         else:
             recommended = scale
-        if to_fill:
-            color = PURPLE_B
-        else:
+        if not to_fill:
             color = None
-        lighted_square = (Square(color=BLUE, side_length=recommended,fill_color= color,fill_opacity=0.9)
+        lighted_square = (Square(color=WHITE, side_length=recommended,fill_color= color,fill_opacity=0.9)
                            .move_to([which_squarex * recommended - 7 + 0.5 * recommended  , -1 * which_squarey * recommended + 4 - 0.5* recommended,0]))
 
         return lighted_square
