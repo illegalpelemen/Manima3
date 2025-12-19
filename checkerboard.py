@@ -3,7 +3,30 @@ import random
 
 #to_fill = (v % 2 == 0 and e % 2 !=0) or (e % 2 == 0 and v % 2 !=0)
 class Check(Scene):
-
+    # def gen_list(self):
+    #     n = 11
+    #     svx = n
+    #     svy = n
+    #     a = []
+    #
+    #     for q in range(svy):
+    #         b = []
+    #
+    #         for i in range(svx):
+    #             if  q == i or q+i+1 == n:
+    #                 b.append(3)
+    #             elif q > i and q + i + 1 < n:
+    #                 b.append(1)
+    #             elif q < i and q + i + 1 > n:
+    #                 b.append(4)
+    #             elif q > i and q + i + 1 > n:
+    #                 b.append(2)
+    #             elif q < i and q + i + 1 < n:
+    #                 b.append(5)
+    #             else:
+    #                 b.append(0)
+    #         a.append(b)
+    #     return a
     def gen_list(self):
         n = 11
         svx = n
@@ -14,19 +37,21 @@ class Check(Scene):
             b = []
 
             for i in range(svx):
-                if  q == i or q+i+1 == n:
-                    b.append(3)
-                elif q > i and q + i + 1 < n:
-                    b.append(1)
-                elif q < i and q + i + 1 > n:
-                    b.append(4)
-                elif q > i and q + i + 1 > n:
-                    b.append(2)
-                elif q < i and q + i + 1 < n:
-                    b.append(5)
-                else:
-                    b.append(0)
+
+                b.append(0)
             a.append(b)
+        q = 0
+        i = n // 2
+        w = 1
+        while q != svy - 1:
+
+
+            for p in range(w):
+                a[q][i + p] = 1
+                a[q + 1][i + p] = 1
+            q += 2
+            i -= 1
+            w += 2
         return a
 
     def construct(self):
@@ -40,7 +65,7 @@ class Check(Scene):
 
                 value = a[v][e]
                 to_fill =  value != 0
-                color = {5:PURPLE_B,1:PINK,2:RED,3:BLUE,4:YELLOW}[value]
+                color = {5:PURPLE_B,1:PINK,2:RED,3:GREEN,4:YELLOW, 0 : WHITE}[value]
 
                 self.add(self.square(amount_of_squares, amount_of_squaresy, e,v,to_fill,color))
 
