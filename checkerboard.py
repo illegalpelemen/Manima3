@@ -40,6 +40,7 @@ class Check(Scene):
 
                 b.append(0)
             a.append(b)
+        s = 1
         q = 0
         i = n // 2
         w = 1
@@ -47,11 +48,27 @@ class Check(Scene):
 
 
             for p in range(w):
-                a[q][i + p] = 1
-                a[q + 1][i + p] = 1
+                s += 1
+                if s % 3 == 0:
+                    a[q][i+p] = random.randint(3,5)
+                else:
+
+                    a[q][i + p] = 1
+
+            for p in range(w):
+                s += 1
+                if s % 3 == 0:
+                    a[q + 1][i + p] = random.randint(3, 5)
+                else:
+                    a[q + 1][i + p] = 1
+
             q += 2
             i -= 1
             w += 2
+        w = int(w * 0.5 )
+        i = n // 2 - w // 2
+        for p in range(w):
+            a[q][i + p] = 2
         return a
 
     def construct(self):
@@ -65,7 +82,7 @@ class Check(Scene):
 
                 value = a[v][e]
                 to_fill =  value != 0
-                color = {5:PURPLE_B,1:PINK,2:RED,3:GREEN,4:YELLOW, 0 : WHITE}[value]
+                color = {5:PURPLE_B,1:GREEN,2:DARK_BROWN,3:RED,4:YELLOW,0: WHITE}[value]
 
                 self.add(self.square(amount_of_squares, amount_of_squaresy, e,v,to_fill,color))
 
