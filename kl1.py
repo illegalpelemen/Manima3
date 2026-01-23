@@ -23,9 +23,9 @@ class SquareToCircle(ThreeDScene):
         fadeout = FadeOut(earth)
         circle_path = Circle(2)
         orbit = MoveAlongPath(earth,circle_path)
-        # anim_phi = self.camera.phi_tracker.animate.set_value(40 * DEGREES)
-        # anim_theta = self.camera.theta_tracker.animate.set_value(40 * DEGREES)
+        anim_phi = self.camera.phi_tracker.animate.set_value(40 * DEGREES)
+        anim_theta = self.camera.theta_tracker.animate.set_value(40 * DEGREES)
         self.play(anim)
-        # self.play(orbit,anim_phi,anim_theta,run_time = 10)
+        self.play(orbit,anim_phi,anim_theta,run_time = 10)
 
         self.play(fadeout)

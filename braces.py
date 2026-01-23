@@ -1,4 +1,4 @@
-3import random
+import random
 from manim import *
 from manim.utils.space_ops import rotate_vector
 

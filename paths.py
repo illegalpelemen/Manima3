@@ -4,8 +4,8 @@ import random
 #to_fill = (v % 2 == 0 and e % 2 !=0) or (e % 2 == 0 and v % 2 !=0)
 class Check(Scene):
     def gen_list(self):
-        x = 9
-        y = 5
+        x = 10
+        y = 8
         svx = x
         svy = y
         a = []
@@ -23,34 +23,47 @@ class Check(Scene):
 
     def construct(self):
         a = self.gen_list()
-        amount_of_squares = len(a[0])
-        amount_of_squaresy = len(a)
-        r = range(0, amount_of_squares, 1)
+        self.amount_of_squares = len(a[0])
+        self.amount_of_squaresy = len(a)
+        r = range(0, self.amount_of_squares, 1)
 
-        for v in range(amount_of_squaresy):
+        for v in range(self.amount_of_squaresy):
 
             for e in r:
                 value = a[v][e]
                 to_fill = value != 0
-                square_on_grid = self.square(amount_of_squares, amount_of_squaresy, e, v)
+                square_on_grid = self.square(e, v)
 
 
 
                 self.add(square_on_grid)
-        size,x_coord,y_coord = self.oordinate(amount_of_squares, amount_of_squaresy, 0, 0)
-        self.add(Circle(size * 0.5,BLUE).move_to([x_coord,y_coord,0]))
+        size,x_coord,y_coord = self.oordinate(0, 0)
+        circ = Circle(size * 0.5, BLUE)
+        self.add(circ.move_to([x_coord,y_coord,0]))
+        self.play(self.line_draw(circ,0,0,1,0))
+        self.play(self.line_draw(circ, 1, 0, 1, 1))
+        self.play(self.line_draw(circ, 1, 1, 2, 1))
+        self.wait(8)
+    def trajectory(self,c,list_of_movements):
+        pass
 
+    def line_draw(self,c, x1, y1, x2, y2):
+        _,x1,y1 = self.oordinate(x1,y1)
+        _, x2, y2 = self.oordinate(x2, y2)
+        line = Line([x1,y1,0],[x2,y2,0])
+        anim = MoveAlongPath(c,line)
+        return anim
 
-    def square(self, amount_of_squaresx, amount_of_squaresy, which_squarex,which_squarey):
-        recommended, x_coord, y_coord = self.oordinate(amount_of_squaresx, amount_of_squaresy, which_squarex, which_squarey)
+    def square(self, which_squarex,which_squarey):
+        recommended, x_coord, y_coord = self.oordinate( which_squarex, which_squarey)
 
 
         lighted_square = (Square(color=WHITE, side_length=recommended,fill_opacity=0.9)
                            .move_to([x_coord,y_coord,0]))
         return lighted_square
-    def oordinate(self,amount_of_squaresx, amount_of_squaresy, which_squarex,which_squarey):
-        scale = 14 / amount_of_squaresx
-        scaley = 8 / amount_of_squaresy
+    def oordinate(self,which_squarex,which_squarey):
+        scale = 14 / self.amount_of_squares
+        scaley = 8 / self.amount_of_squaresy
         if scale > scaley:
             recommended = scaley
         else:
