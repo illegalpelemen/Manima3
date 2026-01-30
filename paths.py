@@ -37,15 +37,16 @@ class Check(Scene):
 
 
                 self.add(square_on_grid)
-        size,x_coord,y_coord = self.oordinate(0, 0)
+        size,x_coord,y_coord = self.oordinate(5, 5)
         circ = Circle(size * 0.5, BLUE)
         self.add(circ.move_to([x_coord,y_coord,0]))
-        self.play(self.line_draw(circ,0,0,1,0))
-        self.play(self.line_draw(circ, 1, 0, 1, 1))
-        self.play(self.line_draw(circ, 1, 1, 2, 1))
+        self.trajectory(circ,[[1,1],[1,3],[3,3],[4,3],[4,6],[4,7],[7,7]])
         self.wait(8)
     def trajectory(self,c,list_of_movements):
-        pass
+        lists = list_of_movements
+
+        for v in range(1,len(lists)):
+            self.play(self.line_draw(c,lists[v-1][0],lists[v-1][1],lists[v][0],lists[v][1] ))
 
     def line_draw(self,c, x1, y1, x2, y2):
         _,x1,y1 = self.oordinate(x1,y1)
