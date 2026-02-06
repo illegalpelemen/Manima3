@@ -4,8 +4,8 @@ import random
 #to_fill = (v % 2 == 0 and e % 2 !=0) or (e % 2 == 0 and v % 2 !=0)
 class Check(Scene):
     def gen_list(self):
-        x = 10
-        y = 8
+        x = 1
+        y = 5
         svx = x
         svy = y
         a = []
@@ -37,11 +37,16 @@ class Check(Scene):
 
 
                 self.add(square_on_grid)
-        size,x_coord,y_coord = self.oordinate(5, 5)
-        circ = Circle(size * 0.5, BLUE)
-        self.add(circ.move_to([x_coord,y_coord,0]))
-        self.trajectory(circ,[[1,1],[1,3],[3,3],[4,3],[4,6],[4,7],[7,7]])
+        size,x_coord,y_coord = self.oordinate(0, 0)
+
+        for d in range(5):
+            circ = Circle(size * 0.5, BLUE)
+            _,_,r = self.oordinate(0, d)
+            self.add(circ.move_to([x_coord,r,0]))
+        #self.add(circ.move_to([x_coord,y_coord,0]))
+            self.trajectory(circ,[[0,d],[d+1,d]])
         self.wait(8)
+
     def trajectory(self,c,list_of_movements):
         lists = list_of_movements
 
