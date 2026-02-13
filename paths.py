@@ -1,5 +1,6 @@
 from manim import *
 import random
+import trajectories
 
 #to_fill = (v % 2 == 0 and e % 2 !=0) or (e % 2 == 0 and v % 2 !=0)
 class Check(Scene):
@@ -39,13 +40,19 @@ class Check(Scene):
                 self.add(square_on_grid)
         size,x_coord,y_coord = self.oordinate(0, 0)
 
-        for d in range(5):
-            circ = Circle(size * 0.5, BLUE)
-            _,_,r = self.oordinate(0, d)
-            self.add(circ.move_to([x_coord,r,0]))
-        #self.add(circ.move_to([x_coord,y_coord,0]))
-            self.trajectory(circ,[[0,d],[d+1,d]])
-        self.wait(8)
+        # for d in range(5):
+        #     circ = Circle(size * 0.5, BLUE)
+        #     _,_,r = self.oordinate(0, d)
+        #     self.add(circ.move_to([x_coord,r,0]))
+        # #self.add(circ.move_to([x_coord,y_coord,0]))
+        #     self.trajectory(circ,[[0,d],[d+1,d]])
+        # self.wait(8)
+        circ = Circle(size * 0.5,BLUE)
+        list_of_trajectories = [[[0,0],[1,0]] ]+[[2,0]]
+        self.add(circ.move_to([x_coord,y_coord,0]))
+
+        list_of_trajectories = trajectories.list_of_traject()
+        self.trajectory(circ, list_of_trajectories)
 
     def trajectory(self,c,list_of_movements):
         lists = list_of_movements
