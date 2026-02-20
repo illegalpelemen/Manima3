@@ -5,8 +5,8 @@ import trajectories
 #to_fill = (v % 2 == 0 and e % 2 !=0) or (e % 2 == 0 and v % 2 !=0)
 class Check(Scene):
     def gen_list(self):
-        x = 1
-        y = 5
+        x = 30
+        y = 30
         svx = x
         svy = y
         a = []
@@ -47,18 +47,28 @@ class Check(Scene):
         # #self.add(circ.move_to([x_coord,y_coord,0]))
         #     self.trajectory(circ,[[0,d],[d+1,d]])
         # self.wait(8)
-        circ = Circle(size * 0.5,BLUE)
-        list_of_trajectories = [[[0,0],[1,0]] ]+[[2,0]]
-        self.add(circ.move_to([x_coord,y_coord,0]))
 
+        list_of_trajectories = [[[0,0],[1,0]] ]+[[2,0]]
+
+        list_anim = []
         list_of_trajectories = trajectories.list_of_traject()
-        self.trajectory(circ, list_of_trajectories)
+        for w in range(len(list_of_trajectories)):
+
+            circ = Circle(size * 0.5, BLUE)
+            self.add(circ.move_to([x_coord, y_coord, 0]))
+            anim = self.trajectory(circ, list_of_trajectories[w])
+            list_anim.append(Succession(*anim))
+        self.play(AnimationGroup(*list_anim,rate_func= linear))
 
     def trajectory(self,c,list_of_movements):
         lists = list_of_movements
-
+        list_anim = []
         for v in range(1,len(lists)):
-            self.play(self.line_draw(c,lists[v-1][0],lists[v-1][1],lists[v][0],lists[v][1] ))
+            anim = self.line_draw(c,lists[v-1][0],lists[v-1][1],lists[v][0],lists[v][1] )
+            list_anim.append(anim)
+            if len(list_anim)>15:
+                del list_anim[0]
+        return list_anim
 
     def line_draw(self,c, x1, y1, x2, y2):
         _,x1,y1 = self.oordinate(x1,y1)
