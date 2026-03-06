@@ -12,7 +12,7 @@ class Lines(Scene):
         #self.play(MoveAlongPath(dot1, self.line1))
         #self.play(MoveAlongPath(dot1, self.line1.reverse_direction()))
         self.wait(10)
-    def rot(self,mob,dt):
+    def rot(self,mob:Line,dt):
         mob.rotate(DEGREES * 5)
     def move(self,mob,dt):
 
