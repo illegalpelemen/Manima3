@@ -5,6 +5,8 @@ class Lines(Scene):
         self.dot1 = Dot(radius=0.2,color=WHITE)
         self.gr1  = Group(self.line1,self.dot1)
         self.x = 0
+        self.velocity = 0.02
+        self.direction = True
         self.add(self.gr1)
 
         self.gr1.add_updater(self.rot)
@@ -12,13 +14,22 @@ class Lines(Scene):
         #self.play(MoveAlongPath(dot1, self.line1))
         #self.play(MoveAlongPath(dot1, self.line1.reverse_direction()))
         self.wait(10)
-    def rot(self,mob:Line,dt):
+    def rot(self,mob:Group,dt):
         mob.rotate(DEGREES * 5)
     def move(self,mob,dt):
 
-        self.x += 0.01
-        if self.x > 1:
+
+        if self.direction:
+            self.x += self.velocity
+        if not self.direction:
+            self.x -= self.velocity
+        if self.x <= 0:
+            self.direction = True
+            self.x = 0
+        if self.x >= 1:
+            self.direction = False
             self.x = 1
+
         point = self.line1.point_from_proportion(self.x)
         mob.move_to(point)
 
